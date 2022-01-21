@@ -1,0 +1,37 @@
+<<canvas width="600" height="400"></canvas>
+
+<script>
+
+	var tela = document.querySelector('canvas');
+	var pincel = tela.getContext('2d');
+
+	// fazer o retângulo verde:
+
+	pincel.fillStyle = 'green';
+	pincel.fillRect(0,0,600,400);
+
+	// fazer o losango amarelo:
+
+	pincel.fillStyle = 'yellow';
+	pincel.moveTo(0,200);
+	pincel.lineTo(300,0);
+	pincel.lineTo(600,200);
+	pincel.lineTo(300,400);
+	pincel.lineTo(0,200);
+	pincel.fill();
+
+	// fazer a bola azul:
+
+	pincel.fillStyle = 'blue';
+	pincel.beginPath();
+	pincel.arc(300, 200, 150, 0, 2 * 3.14);
+	pincel.fill();
+
+	// fazer a faixa branca:
+
+	pincel.fillStyle = 'white';
+	pincel.beginPath();
+	pincel.fill();
+	pincel.fillRect(150,180,300,35);
+	
+</script>

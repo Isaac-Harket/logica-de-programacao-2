@@ -1,0 +1,120 @@
+<canvas width = "600" height = "400"> </canvas>
+
+<script>
+
+    var tela = document.querySelector ("canvas");
+    var pincel = tela.getContext ("2d");
+
+    function desenharCirculos (x, y, raio, cor) {
+
+        pincel.fillStyle = cor;
+        pincel.beginPath();
+        pincel.arc (x, y, raio, 0, 2*Math.PI);
+        pincel.fill();
+    }
+
+    function desenharAlvo (x, y, raio, cor) {
+
+        pincel.fillStyle = cor;
+        pincel.beginPath();
+        pincel.arc (x, y, raio, 0, 2*Math.PI);
+        pincel.fill();
+    }
+
+    function desenharBorda() {
+
+        pincel.fillStyle = "black";
+        pincel.fillRect (0, 0, 600, 10);    // topo
+        pincel.fillRect (0, 0, 10, 400);    // esquerda
+        pincel.fillRect (0, 390, 600, 10);  //fundo
+        pincel.fillRect (590, 0, 10, 400);  // direita
+    }
+
+    function limparTela () {
+
+        pincel.clearRect (0, 0, 600, 400);
+    }
+
+    var xa = Math.round(Math.random() * 600);
+
+        while (xa >= 0 && xa <= 20 || xa >= 580 && xa <= 600) {
+           
+            xa = Math.round(Math.random() * 600);
+        }
+
+    var ya = Math.round(Math.random() * 400);
+
+        while (ya >= 0 && ya <= 20 || ya >= 380 && ya <= 400) {
+            
+            ya = Math.round(Math.random() * 400);
+        }
+
+    var x = 300;
+
+    var y = 200;
+
+    var começar = true;
+
+    function cobrinha() {
+
+        if (começar) {  
+
+                    if (x == 19 || x == 581 || y == 19 || y == 381) {
+
+                            começar = false;
+                            pincel.fillStyle = "red"
+                            pincel.fillRect (10, 10, 580, 380);
+                            pincel.fillStyle = "white";
+                            pincel.font = "30px Georgia"
+                            pincel.fillText ("Ops, tente novamente", 150, 200);
+                    }
+                    
+                    else if (x >= xa - 10 && x <= xa + 10 && y >= ya - 10 && y <= ya + 10) {
+
+                            começar = false;
+                            pincel.fillStyle = "green"
+                            pincel.fillRect (10, 10, 580, 380);
+                            pincel.fillStyle = "white";
+                            pincel.font = "30px Georgia"
+                            pincel.fillText ("Parabéns, você acertou!", 130, 200);
+                    }
+                   
+                    else {  limparTela();
+                            desenharCirculos (x, y, 10, "blue");
+                            desenharAlvo (xa, ya, 8, "red");
+                            desenharBorda();
+
+                            if (tecla == 37) {  //esquerda
+                                    x = x - 1;
+                            }
+
+                            if (tecla == 38) {  //cima
+                                y = y - 1;
+                                x
+                            }
+
+                            if (tecla == 39) {  //direta
+                                x = x + 1;
+                                y
+                            }
+
+                            if (tecla == 40) {  //baixo
+                                y = y + 1;
+                                x
+                            }
+                    }
+        }
+    }
+
+    setInterval (cobrinha, 1);
+
+    var tecla = 0;
+
+    function leDoTeclado (evento) {
+
+        tecla = evento.keyCode;        
+    }    
+
+    document.onkeydown = leDoTeclado;
+
+</script>
